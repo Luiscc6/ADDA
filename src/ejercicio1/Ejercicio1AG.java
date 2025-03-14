@@ -23,7 +23,7 @@ public class Ejercicio1AG {
 	}
 	
 	public static void main(String[] args) {
-		solucion("resources/ejercicio1/DatosEntrada1.txt");
+		solucion("resources/ejercicio1/DatosEntrada2.txt");
 		
 	}
 }

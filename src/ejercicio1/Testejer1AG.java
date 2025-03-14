@@ -20,7 +20,7 @@ public class Testejer1AG {
 		StoppingConditionFactory.NUM_GENERATIONS = 1000; // Más generaciones
 		StoppingConditionFactory.stoppingConditionType = StoppingConditionFactory.StoppingConditionType.GenerationCount;
 		
-		InRangeejer1 p = new InRangeejer1("resources/ejercicio1/DatosEntrada1.txt");
+		InRangeejer1 p = new InRangeejer1("resources/ejercicio1/DatosEntrada2.txt");
 		
 		
 		AlgoritmoAG<List<Integer>,SolucionAlmacen> ap = AlgoritmoAG.of(p);

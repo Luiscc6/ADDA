@@ -56,7 +56,7 @@ public class InRangeejer1 implements ValuesInRangeData<Integer, SolucionAlmacen>
         Map<Integer, Double> capacidadUsada = new HashMap<>();
         for (int i = 0; i < DatosAlmacenes.getNumProductos(); i++) {
             int almacen = value.get(i);
-            if (almacen >= DatosAlmacenes.getNumAlmacenes()) continue;
+            //if (almacen >= DatosAlmacenes.getNumAlmacenes()) continue;
             double volumen = DatosAlmacenes.getMetrosCubicosProducto(i);
             capacidadUsada.put(almacen, capacidadUsada.getOrDefault(almacen, 0.0) + volumen);
         }
