@@ -17,9 +17,13 @@ public class SolucionCursos {
     private Double puntuacionTotal;
     private Integer costeTotal;
 
+    /*
     private SolucionCursos(List<Integer> ls) {
         solucion = Map2.empty();
-        for (int i = 0; i>=ls.size(); i ++) {
+        puntuacionTotal = 0.;
+        costeTotal = 0;
+        
+        for (int i = 0; i<ls.size(); i ++) {
         	if(ls.get(i)>=1) {
         	Integer curso = i;
         	Integer selec = ls.get(i);
@@ -31,6 +35,22 @@ public class SolucionCursos {
         }
         	
     }
+    */
+    
+    private SolucionCursos(List<Integer> ls) { //PLE
+    	//TODO
+    	puntuacionTotal = 0.;
+    	costeTotal = 0;
+    	solucion = Map2.empty();
+    	for(int i=0; i<DatosCursos.getNumCursos(); i++) {
+    	if(ls.get(i)>0) {
+    	solucion.put(i, 1);
+    	puntuacionTotal+=DatosCursos.getRelevancia(i);
+    	costeTotal+=DatosCursos.getCoste(i);
+    	}
+    	}
+    	numCursos = solucion.size();
+    	}
 
     @Override
     public String toString() {

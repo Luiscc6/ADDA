@@ -1,6 +1,7 @@
 package ejercicio2;
 
 import java.util.List;
+
 import java.util.Locale;
 
 import us.lsi.ag.agchromosomes.AlgoritmoAG;
