@@ -2,6 +2,9 @@ package ejercicio3;
 
 import java.util.List;
 import java.util.Map;
+
+import us.lsi.common.Map2;
+
 import java.util.HashMap;
 
 public class SolucionFestival {
@@ -16,7 +19,19 @@ public class SolucionFestival {
     private Integer unidadesTotales;
 
     private SolucionFestival(List<Integer> ls) {
-    	//TODO
+    	numAsignaciones = 0;
+    	solucion = new HashMap<>();
+    	for(Integer i=0;i<=DatosFestival.getNumTiposEntrada()*DatosFestival.getNumAreas();i++ ) {
+    		Integer k = i/DatosFestival.getNumAreas();
+    		Integer v = i%DatosFestival.getNumAreas();
+    		solucion.put(k, v);
+    		numAsignaciones++;
+    		
+    	}
+    	
+    	
+    	
+    	
     }
 
     @Override

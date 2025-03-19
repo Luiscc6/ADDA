@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio2;
 
 import java.util.List;
 import java.util.Locale;
@@ -6,7 +6,7 @@ import java.util.Locale;
 import us.lsi.ag.agchromosomes.AlgoritmoAG;
 import us.lsi.ag.agstopping.StoppingConditionFactory;
 
-public class Testejer1AG {
+public class Tester2AG {
 	
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.of("en", "US"));
@@ -20,10 +20,10 @@ public class Testejer1AG {
 		StoppingConditionFactory.NUM_GENERATIONS = 1000; // Más generaciones
 		StoppingConditionFactory.stoppingConditionType = StoppingConditionFactory.StoppingConditionType.GenerationCount;
 		
-		InRangeejer1 p = new InRangeejer1("resources/ejercicio1/DatosEntrada1.txt");
+		Ejer2AG p = new Ejer2AG("resources/ejercicio2/DatosEntrada1.txt");
 		
 		
-		AlgoritmoAG<List<Integer>,SolucionAlmacen> ap = AlgoritmoAG.of(p);
+		AlgoritmoAG<List<Integer>,SolucionCursos> ap = AlgoritmoAG.of(p);
 		ap.ejecuta();
 		
 

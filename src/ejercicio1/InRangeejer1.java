@@ -34,7 +34,7 @@ public class InRangeejer1 implements ValuesInRangeData<Integer, SolucionAlmacen>
                 .boxed()
                 .filter(i -> value.get(i) < DatosAlmacenes.getNumAlmacenes())
                 .collect(Collectors.groupingBy(value::get));
-            System.out.println(productosPorAlmacen);
+            //System.out.println(productosPorAlmacen);
 
             for (List<Integer> productos : productosPorAlmacen.values()) {
                 for (int i = 0; i < productos.size(); i++) {
@@ -56,7 +56,7 @@ public class InRangeejer1 implements ValuesInRangeData<Integer, SolucionAlmacen>
         Map<Integer, Double> capacidadUsada = new HashMap<>();
         for (int i = 0; i < DatosAlmacenes.getNumProductos(); i++) {
             int almacen = value.get(i);
-            //if (almacen >= DatosAlmacenes.getNumAlmacenes()) continue;
+            if (almacen >= DatosAlmacenes.getNumAlmacenes()) continue;
             double volumen = DatosAlmacenes.getMetrosCubicosProducto(i);
             capacidadUsada.put(almacen, capacidadUsada.getOrDefault(almacen, 0.0) + volumen);
         }

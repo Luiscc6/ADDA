@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import us.lsi.common.Map2;
+
 public class SolucionCursos {
 
     public static SolucionCursos create(List<Integer> ls) {
@@ -16,7 +18,18 @@ public class SolucionCursos {
     private Integer costeTotal;
 
     private SolucionCursos(List<Integer> ls) {
-        //TODO
+        solucion = Map2.empty();
+        for (int i = 0; i>=ls.size(); i ++) {
+        	if(ls.get(i)>=1) {
+        	Integer curso = i;
+        	Integer selec = ls.get(i);
+        	costeTotal = costeTotal +(curso * DatosCursos.getCoste(i));
+        	puntuacionTotal += DatosCursos.getRelevancia(i);
+        	solucion.put(curso, selec);
+        	numCursos++;
+        	}
+        }
+        	
     }
 
     @Override

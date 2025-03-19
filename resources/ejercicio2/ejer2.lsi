@@ -1,0 +1,27 @@
+head section
+
+Integer getNumCursos() //n
+Integer getNumAreas() // m
+Integer gestCoste(Integer i) //ci
+Integer getArea(Integer i) // ai
+Integer getRelevancia(Integer i) // ri
+Integer getDuracion(Integer i) // di
+Integer getPresupuestoTotal() //pmax
+
+Integer n = getNumCursos()
+Integer m = getNumAreas()
+
+goal section
+
+max sum(getRelevancia(i) x[i], i in 0 .. n
+
+constraints section
+
+sum(x[i], i in 0 .. n | getArea(i) = j) >= 1, j in 0 .. m
+sum(x[i], i in 0 .. n | getArea(i) = 0) - sum(x[i], i in 0 .. n | getArea(i) = j) > 0, j in 1 .. m
+sum((getDuracion(i) x[i], i in 0 .. n) - 20 n) >= 0
+sum(x[i] getCoste(i) , i in 0 .. n) <= getPresupuestoTotal
+
+bin 
+
+x[i], i in 0 .. n
