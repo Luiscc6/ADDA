@@ -25,6 +25,11 @@ public class SolucionFestival {
     		Integer k = i/DatosFestival.getNumAreas();
     		Integer v = i%DatosFestival.getNumAreas();
     		solucion.put(k, v);
+    		for (int area:solucion.keySet()) {
+    			costeTotal += DatosFestival.getCosteAsignacion(solucion.get(area), area);
+    			   			
+    		}
+    		unidadesTotales += ls.get(i);
     		numAsignaciones++;
     		
     	}
