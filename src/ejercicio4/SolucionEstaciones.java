@@ -3,10 +3,12 @@ package ejercicio4;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import us.lsi.common.List2;
+
 public class SolucionEstaciones {
 
     public static SolucionEstaciones create(List<Integer> ls) {
-        return null;
+        return new SolucionEstaciones(ls);
     }
     
     private Integer numEstaciones;
@@ -15,6 +17,11 @@ public class SolucionEstaciones {
     private Double tiempoMedio;
 
     private SolucionEstaciones(List<Integer> ls) {
+    	numEstaciones = 0;
+    	List<Estacion> camino = List2.empty();
+    	Double tiempoTotal = 0.0;
+    	Double tiempoMedio = 0.0;
+    	
 
     }
 
