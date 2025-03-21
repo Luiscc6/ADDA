@@ -20,7 +20,7 @@ public class TestCafeAG {
 		StoppingConditionFactory.NUM_GENERATIONS = 1000;
 		StoppingConditionFactory.stoppingConditionType = StoppingConditionFactory.StoppingConditionType.GenerationCount;
 		
-		InRangeCafeAG p1 = new InRangeCafeAG("ficheros/Ejercicio1DatosEntrada1.txt");
+		InRangeCafeAG p1 = new InRangeCafeAG("resources/ficheros/Ejercicio1DatosEntrada1.txt");
 		
 		AlgoritmoAG<List<Integer>,SolucionCafe> ap1= AlgoritmoAG.of(p1);
 		

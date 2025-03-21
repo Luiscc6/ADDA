@@ -26,7 +26,7 @@ public class Ejercicio2PLE {
 	public static void ejercicio2_model(String fichero) throws IOException {
 	
 		
-		
+	}
 	public static void main(String[] args) throws IOException {
 		ejercicio2_model("ficheros/Ejercicio2DatosEntrada1.txt");
 		ejercicio2_model("ficheros/Ejercicio2DatosEntrada2.txt");

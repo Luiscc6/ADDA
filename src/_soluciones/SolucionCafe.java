@@ -24,8 +24,20 @@ public class SolucionCafe {
 	}
 
 	private SolucionCafe(List<Integer> ls) {
-		//TODO
-	}
+		beneficioTotal = 0.;
+		solucion = List2.of();
+		soluciones = List2.of();
+		for(int i=0; i<ls.size(); i++) { if(ls.get(i)>0) {
+		                    Integer p = ls.get(i);
+		Integer b = DatosCafe.getVariedades().get(i).getBeneficio();
+		soluciones.add(DatosCafe.getVariedades().get(i)); solucion.add(p);
+		                    beneficioTotal += p*b;
+		               }
+		}}
+		
+		
+		
+	
 	
 	public static SolucionCafe empty() {
 		return new SolucionCafe();
