@@ -29,12 +29,13 @@ public class InRangeejer1 implements ValuesInRangeData<Integer, SolucionAlmacen>
 
 
             // 2. Calcular incompatibilidades 
+    		System.out.println(value);
             int incompatibles = 0;
             Map<Integer, List<Integer>> productosPorAlmacen = IntStream.range(0, DatosAlmacenes.getNumProductos())
                 .boxed()
                 .filter(i -> value.get(i) < DatosAlmacenes.getNumAlmacenes())
                 .collect(Collectors.groupingBy(value::get));
-            //System.out.println(productosPorAlmacen);
+            System.out.println(productosPorAlmacen);
 
             for (List<Integer> productos : productosPorAlmacen.values()) {
                 for (int i = 0; i < productos.size(); i++) {
