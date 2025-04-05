@@ -6,50 +6,42 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.jgrapht.GraphPath;
+import ejercicio1p4.DatosAlmacenes.Producto;
 
-import ejercicio1.DatosAlmacenes;
-import ejercicio1.DatosAlmacenes.Producto;
-import us.lsi.common.Multiset;
+public class SolucionAlmacen {
 
-public record SolucionAlmacen(Integer diferencia, List<Integer> solucion) implements Comparable<SolucionAlmacen>{
+    public static SolucionAlmacen create(List<Integer> ls) {
+        return new SolucionAlmacen(ls);
+    }
 
-	
-	
-	public static SolucionAlmacen of(List<Integer> ls) {
-		return null;
-		//TODO
-		
-	}
-	
-	public static SolucionAlmacen ofEdges(List<Ejer1Vertex> list) {
-		return null;
-		//TODO
-		
-	}
-	
-	public static SolucionAlmacen of(GraphPath<Ejer1Vertex, Ejer1Vertex> path) {
-		return SolucionAlmacen.ofEdges(path.getEdgeList());
-	}
-	
-	
-	public Integer size() {
-		//TODO
-		return null;
-	}
-	
-	@Override
-	public int compareTo(SolucionAlmacen other) {
-		return this.size().compareTo(other.size());
-	}
-	
-	@Override
-	public String toString() {
-		//TODO ejer1
-		return null;
-	}
+    private Integer numproductos;
+    private Map<Producto, Integer> solucion;
 
+
+    private SolucionAlmacen(List<Integer> ls) {
+        numproductos = 0;
+        solucion = new HashMap<>();
+        for (int i = 0; i < ls.size(); i++) {
+            Integer e = ls.get(i);
+            if (e < DatosAlmacenes.getNumAlmacenes()) {
+                Producto v = DatosAlmacenes.getProducto(i);
+                solucion.put(v, e);
+                numproductos++;
+            }
+        }
+    }
+
+
+    @Override
+    public String toString() {
+		return solucion.entrySet().stream()
+		.map(p -> p.getKey().producto()+": Almacen "+p.getValue())
+		.collect(Collectors.joining("\n", "Reparto de productos y almacen en el que se coloca cada uno de ellos:\n", String.format("\nProductos colocados: %d", numproductos)));
+	}
     
+    public Integer getNumProductos() {
+    	return solucion.size();
+    }
     
 }
 
