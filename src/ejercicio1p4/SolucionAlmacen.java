@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import ejercicio1p4.DatosAlmacenes.Producto;
 
@@ -19,17 +20,15 @@ public class SolucionAlmacen {
 
 
     private SolucionAlmacen(List<Integer> ls) {
-        numproductos = 0;
-        solucion = new HashMap<>();
-        for (int i = 0; i < ls.size(); i++) {
-            Integer e = ls.get(i);
-            if (e < DatosAlmacenes.getNumAlmacenes()) {
-                Producto v = DatosAlmacenes.getProducto(i);
-                solucion.put(v, e);
-                numproductos++;
-            }
-        }
-    }
+		numproductos=(int) IntStream.range(0, ls.size()).filter(x->ls.get(x)!=-1).count();
+		Map<Producto, Integer> res=new HashMap<DatosAlmacenes.Producto, Integer>();
+		for(Integer i=0;i<ls.size();i++) {
+			if(ls.get(i)!=-1) {
+				res.put(DatosAlmacenes.getProducto(i), ls.get(i));
+			}
+		}
+		solucion=res;
+	}
 
 
     @Override

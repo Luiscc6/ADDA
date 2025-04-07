@@ -14,18 +14,20 @@ public interface AlmacenesVertex extends VirtualVertex<AlmacenesVertex, Almacene
 	
 	
 	public static AlmacenesVertexI start() {
-		//TODO
-		List<List<Integer>> reparto = List2.of(new ArrayList<Integer>());
-		System.out.println(reparto);
-		List<Integer> cprestante = List2.of();
-		for(int i = 0; i <DatosAlmacenes.getNumAlmacenes(); i++) {
-			System.out.println(i);
-			cprestante.add(DatosAlmacenes.getMetrosCubicosAlmacen(i));
-		}
-		System.out.println(cprestante);
-		var vertice = new AlmacenesVertexI(0,reparto,cprestante);
-		System.out.println(vertice);
-		return vertice;
+	    List<List<Integer>> reparto = new ArrayList<>();
+	    for (int i = 0; i < DatosAlmacenes.getNumAlmacenes(); i++) {
+	        reparto.add(new ArrayList<Integer>()); 
+	    }
+	    List<Integer> cprestante = new ArrayList<>(); 
+	    
+	    
+	    for (int i = 0; i < DatosAlmacenes.getNumAlmacenes(); i++) {
+	        cprestante.add(DatosAlmacenes.getMetrosCubicosAlmacen(i));
+	    }
+	    
+	    var vertice = new AlmacenesVertexI(0, reparto, cprestante);
+	    System.out.println("soy vertice:  -  " + vertice);
+	    return vertice;
 	}
-	//[0,[[]],[60,40]
+	//[0,[[],[]]],[60,40]
 }
