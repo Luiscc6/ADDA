@@ -12,7 +12,7 @@ public record AlmacenesVertexI(Integer index, List<List<Integer>> reparto, List<
 
 	@Override
 	public List<Integer> actions() {
-		List<Integer> asg = List2.of();
+		List<Integer> asg = new ArrayList<Integer>();
 		int aux = 0;
 		if (index == DatosAlmacenes.getNumProductos()) {
 			return asg; // Si no podemos seguir ya que index == n, devolvemos una lista vacia
