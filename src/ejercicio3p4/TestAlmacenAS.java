@@ -1,4 +1,4 @@
-package ejercicio2p4;
+package ejercicio3p4;
 
 import java.util.List;
 
@@ -15,22 +15,22 @@ import us.lsi.path.EGraphPath.PathType;
 
 public class TestAlmacenAS {
 	
-	public static EGraph<CursosVertex, CursosEdge> iniGraph() {
-		return EGraph.virtual(CursosVertex.start())
+	public static EGraph<FestivalVertex, FestivalEdge> iniGraph() {
+		return EGraph.virtual(FestivalVertex.start())
 				.pathType(PathType.Sum)
 				.type(Type.Max)
-				.edgeWeight(CursosEdge::weight)
-				.heuristic(AlmacenesHeuristic::heuristic)
+				.edgeWeight(FestivalEdge::weight)
+				.heuristic(FestivalHeuristic::heuristic)
 				.build();
 	}
 	
-	public static void print(String alg,GraphPath<CursosVertex, CursosEdge> s) {
+	public static void print(String alg,GraphPath<FestivalVertex, FestivalEdge> s) {
 		List<Integer> ls=s.getEdgeList().stream().map(e->e.action()).toList();
-		String2.toConsole("%s = %.2f:\n%s\n%s", alg,s.getWeight(), SolucionCursos.create(ls),String2.linea());
+		String2.toConsole("%s = %.2f:\n%s\n%s", alg,s.getWeight(), SolucionFestival.create(ls),String2.linea());
 	}
 
 	public static void main(String[] args) {
-		DatosCursos.iniDatos("resources/ejercicio2/DatosEntrada3.txt");
+		DatosFestival.iniDatos("resources/ejercicio3/DatosEntrada1.txt");
 		
 		var aEstrella= AStar.of(iniGraph());
 		print("estrella",aEstrella.search().get());

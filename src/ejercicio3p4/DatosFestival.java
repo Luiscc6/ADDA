@@ -102,5 +102,6 @@ public class DatosFestival {
 
     public static void main(String[] args) throws IOException {
         iniDatos("resources/ejercicio3/DatosEntrada1.txt");
+        System.out.println(getNumTiposEntrada());
     }
 }

@@ -52,7 +52,7 @@ public record CursosVertexI(Integer index, Integer prepres, Set<Integer> areascu
 			}
 		
 		asg.add(0);
-		System.out.println("Soy asg" + asg);
+		//System.out.println("Soy asg" + asg);
 		
 		return asg;
 		
@@ -72,7 +72,7 @@ public record CursosVertexI(Integer index, Integer prepres, Set<Integer> areascu
 		areascubi2.add(DatosCursos.getArea(index));
 		cursec2.add(index);
 		var vertice = new CursosVertexI(index+1,prepres3,areascubi2,cursec2);
-		System.out.println(vertice);
+		//System.out.println(vertice);
 		return vertice;
 
 //		int aux = cursec2.stream().mapToInt(i->DatosCursos.getCoste(i)).sum();
