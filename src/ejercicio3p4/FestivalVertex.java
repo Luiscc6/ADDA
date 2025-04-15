@@ -13,6 +13,7 @@ public interface FestivalVertex extends VirtualVertex<FestivalVertex, FestivalEd
 	List<Integer> entradasAreas();
 	
 	
+	
 	public static FestivalVertexI start() {
 	    List<Integer> entraT = List2.empty();
 	    List<Integer> entraA = List2.empty();

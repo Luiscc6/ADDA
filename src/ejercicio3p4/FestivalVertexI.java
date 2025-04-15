@@ -29,7 +29,7 @@ public record FestivalVertexI(Integer index, List<Integer> entradasTipos, List<I
 		int aux2 = DatosFestival.getAforoMaximoArea(j)- aux;//lo que puedo asignar
 		System.out.println("Soy maximo: "  +aux2);
 		 boolean esUltimaAreaParaTipo = (j == DatosFestival.getNumAreas() - 1);
-
+		 
 	        if (esUltimaAreaParaTipo && minimo2 > 0) {
 	            minimo = minimo2;
 	        }
