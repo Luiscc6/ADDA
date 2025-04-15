@@ -14,7 +14,20 @@ public interface FestivalVertex extends VirtualVertex<FestivalVertex, FestivalEd
 	
 	
 	public static FestivalVertexI start() {
-	    return null;
+	    List<Integer> entraT = List2.empty();
+	    List<Integer> entraA = List2.empty();
+	    for(int k =0; k<DatosFestival.getNumTiposEntrada(); k++) {
+	    	entraT.add(DatosFestival.getCuotaMinima(k));
+	    	
+	    }
+	    for(int z =0; z<DatosFestival.getNumAreas(); z++) {
+	    	entraA.add(0);
+	    	
+	    }
+	    var vertice = new FestivalVertexI (0,entraT,entraA);
+	    System.out.println(vertice);
+	    return vertice;
+		
 	}
-	//[0,[[],[]]],[60,40]
+	
 }
