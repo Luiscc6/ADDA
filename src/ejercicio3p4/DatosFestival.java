@@ -1,8 +1,13 @@
 package ejercicio3p4;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import us.lsi.common.Files2;
 import us.lsi.common.List2;
 import us.lsi.common.Map2;
@@ -50,6 +55,7 @@ public class DatosFestival {
     public static Boolean tests = false;
     private static List<Area> areas;
     private static List<TipoEntrada> tiposEntrada;
+    private static List<List<Integer>> sortedAreaIndicesPerType;
     
     public static void iniDatos(String fichero) {
         areas = List2.empty();
@@ -64,7 +70,11 @@ public class DatosFestival {
         }
         if(!tests)
             toConsole();
+        
+      
     }
+    
+    
     
     public static Integer getNumTiposEntrada() {
         return tiposEntrada.size();

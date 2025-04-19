@@ -1,0 +1,82 @@
+package ejercicio1p4;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+public record AlmacenProblem(Integer index, List<List<Integer>> reparto, List<Integer> cpRest) {
+		
+	
+	
+	public static AlmacenProblem initial() {
+	    List<List<Integer>> reparto = new ArrayList<>();
+	    for (int i = 0; i < DatosAlmacenes.getNumAlmacenes(); i++) {
+	        reparto.add(new ArrayList<Integer>()); 
+	    }
+	    List<Integer> cprestante = new ArrayList<>(); 
+	    
+	    
+	    for (int i = 0; i < DatosAlmacenes.getNumAlmacenes(); i++) {
+	        cprestante.add(DatosAlmacenes.getMetrosCubicosAlmacen(i));
+	    }
+	    
+	    var vertice =  of(0, reparto, cprestante);
+	    System.out.println("soy vertice:  -  " + vertice);
+	    return vertice;
+	}
+	
+	public static AlmacenProblem of (Integer index, List<List<Integer>> reparto, List<Integer> cpRest) {
+		return new AlmacenProblem(index, reparto, cpRest);
+	}
+	
+	
+	public List<Integer> actions() {
+		List<Integer> asg = new ArrayList<Integer>();
+		int aux = 0;
+		if (index == DatosAlmacenes.getNumProductos()) {
+			return asg; // Si no podemos seguir ya que index == n, devolvemos una lista vacia
+		}
+		for (int i = 0; i < DatosAlmacenes.getNumAlmacenes(); i++) {
+			aux = this.cpRest.get(i); // capacidad restante del almacen i
+			if (DatosAlmacenes.getMetrosCubicosProducto(index) <= aux) {// verificamos que el producto quepa en el											// almacen
+				System.out.println("soy reparto:   -  " + this.reparto);
+				if (this.reparto.get(i).stream().allMatch(x -> !DatosAlmacenes.sonIncompatibles(index, x))) {
+					asg.add(i);
+				} else {
+					asg.add(-1); // si no son incompatibles, le añadimos a la lista el -1
+				}
+			}
+
+		}
+		//System.out.println("soy asg:  -  " + asg);
+		return asg;
+	}
+	
+	public AlmacenProblem neighbor(Integer a) {
+		   
+	    List<List<Integer>> reparto2 = new ArrayList<>();
+	    for (List<Integer> listaInterna : reparto) {
+	        reparto2.add(new ArrayList<>(listaInterna));
+	    }
+	    List<Integer> cpRest2 = new ArrayList<>(cpRest);
+
+	    if (a == -1) {
+	        return of(index + 1, reparto2, cpRest2);
+	    }
+
+	    int metrosProducto = DatosAlmacenes.getMetrosCubicosProducto(index);
+	    int capActual = cpRest2.get(a);
+
+	    cpRest2.set(a, capActual - metrosProducto); 
+	    reparto2.get(a).add(index);                 
+
+	    return of(index + 1, reparto2, cpRest2);
+	}
+
+	
+	
+	public Double heuristic() {
+		return (double) DatosAlmacenes.getNumProductos().intValue();
+	}
+	
+}

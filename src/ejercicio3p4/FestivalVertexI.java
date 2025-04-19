@@ -22,12 +22,12 @@ public record FestivalVertexI(Integer index, List<Integer> entradasTipos, List<I
 		int j = index%DatosFestival.getNumAreas();//Area`
 		int minimo = 0;
 		int minimo2 = entradasTipos.get(i);
-		System.out.println("Soy minimo: " + minimo);
+		//System.out.println("Soy minimo: " + minimo);
 		int maximo = DatosFestival.getAforoMaximoArea(j);
 		
 		int aux = entradasAreas.get(j);
 		int aux2 = DatosFestival.getAforoMaximoArea(j)- aux;//lo que puedo asignar
-		System.out.println("Soy maximo: "  +aux2);
+		//System.out.println("Soy maximo: "  +aux2);
 		 boolean esUltimaAreaParaTipo = (j == DatosFestival.getNumAreas() - 1);
 		 
 	        if (esUltimaAreaParaTipo && minimo2 > 0) {
@@ -44,7 +44,7 @@ public record FestivalVertexI(Integer index, List<Integer> entradasTipos, List<I
 			}
 		}
 		
-		System.out.println(asg);
+		//System.out.println(asg);
 		return asg;
 		
 				
@@ -66,7 +66,7 @@ public record FestivalVertexI(Integer index, List<Integer> entradasTipos, List<I
 
 	        int nextIndex = this.index + 1;
 	        var vertice = new FestivalVertexI(nextIndex, nextEntradasTipos, nextEntradasAreas);
-	        System.out.println(vertice);
+	        //System.out.println(vertice);
 	        return vertice;
 	    }
 

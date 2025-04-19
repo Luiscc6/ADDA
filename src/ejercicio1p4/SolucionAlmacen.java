@@ -29,6 +29,11 @@ public class SolucionAlmacen {
 		}
 		solucion=res;
 	}
+    
+    public static SolucionAlmacen of(List<Integer> ls) {
+    	
+    	return new SolucionAlmacen(ls);
+    }
 
 
     @Override
