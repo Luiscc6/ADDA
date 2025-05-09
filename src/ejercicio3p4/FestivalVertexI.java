@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 import us.lsi.common.List2;
 
@@ -11,38 +12,47 @@ import us.lsi.common.List2;
 public record FestivalVertexI(Integer index, List<Integer> entradasTipos, List<Integer> entradasAreas)
         implements FestivalVertex {
 
-
+	private Integer i() {
+		return DatosFestival.getI(index);
+		}
+		private Integer jPrima() {
+		return DatosFestival.getJPrima(index);
+		}
+		private Integer j() {
+		return DatosFestival.getJ(index);
+		}
+	
 	@Override
 	public List<Integer> actions() {
 		List<Integer> asg = List2.empty();	
-		if(index == DatosFestival.getNumAreas()*DatosFestival.getNumTiposEntrada()) {
+		//System.out.println(this.index);
+		if((goal() || goalHasSolution()) == true) {
+//			System.out.println("entro");
 			return asg;
 		}
-		int i = index/DatosFestival.getNumAreas(); //Tipo entrada
-		int j = index%DatosFestival.getNumAreas();//Area`
-		int minimo = 0;
+//		System.out.println("soy et "+ entradasTipos);
+//	System.out.println(entradasAreas);
+		
+		
+		int i = i();//Tipo entrada
+		int j = j();//Area`
+		
 		int minimo2 = entradasTipos.get(i);
 		//System.out.println("Soy minimo: " + minimo);
 		int maximo = DatosFestival.getAforoMaximoArea(j);
-		
+//		System.out.println("soy minimo2  "+minimo2);
 		int aux = entradasAreas.get(j);
-		int aux2 = DatosFestival.getAforoMaximoArea(j)- aux;//lo que puedo asignar
-		//System.out.println("Soy maximo: "  +aux2);
-		 boolean esUltimaAreaParaTipo = (j == DatosFestival.getNumAreas() - 1);
-		 
-	        if (esUltimaAreaParaTipo && minimo2 > 0) {
-	            minimo = minimo2;
-	        }
-	        if (minimo > aux2) {
-	        	return asg;
-	        }
-		if(aux<=DatosFestival.getAforoMaximoArea(j)) {
-			for(int k = minimo;k<=aux2;k++) {
+		int aux2 = Math.max(0, maximo - aux);
+//		System.out.println(aux2);
+
+		int minimoreal = Math.abs(Math.min(minimo2, aux2));
+//		System.out.println(minimoreal);
+			for(int k = minimoreal;k<=aux2;k++) {
 				//System.out.println("Soy k " + k);
 				
 				asg.add(k);
 			}
-		}
+			
 		
 		//System.out.println(asg);
 		return asg;
@@ -53,22 +63,23 @@ public record FestivalVertexI(Integer index, List<Integer> entradasTipos, List<I
 
 
 	 @Override
-	    public FestivalVertex neighbor(Integer a) {
-	        List<Integer> nextEntradasTipos = new ArrayList<>(this.entradasTipos);
+	 public FestivalVertex neighbor(Integer a) {
+		 List<Integer> nextEntradasTipos = new ArrayList<>(this.entradasTipos);
 	        List<Integer> nextEntradasAreas = new ArrayList<>(this.entradasAreas);
+		    nextEntradasTipos.set(i(), nextEntradasTipos.get(i()) - a);
+		    
+		    nextEntradasAreas.set(j(), nextEntradasAreas.get(j()) + a);
 
-	        int numAreas = DatosFestival.getNumAreas();
-	        int i = this.index / numAreas;
-	        int j = this.index % numAreas;
+		    Integer index =this.index;
+		    if (nextEntradasTipos.get(i()) == 0) {
+		        index = DatosFestival.getNumAreas() * (i() + 1);
+		    } else {
+		        index = index + 1;
+		    }
 
-	        nextEntradasTipos.set(i, nextEntradasTipos.get(i) - a);
-	        nextEntradasAreas.set(j, nextEntradasAreas.get(j) + a);
+		    return new FestivalVertexI(index, nextEntradasTipos, nextEntradasAreas);
+		}
 
-	        int nextIndex = this.index + 1;
-	        var vertice = new FestivalVertexI(nextIndex, nextEntradasTipos, nextEntradasAreas);
-	        //System.out.println(vertice);
-	        return vertice;
-	    }
 
 
     @Override
@@ -83,6 +94,19 @@ public record FestivalVertexI(Integer index, List<Integer> entradasTipos, List<I
         
     	return this.index() == DatosFestival.getNumAreas()*DatosFestival.getNumTiposEntrada();
     }
+    
+    @Override
+    public Boolean goalHasSolution() {
+    	
+    	boolean goli = IntStream.range(0,
+    	    	DatosFestival.getNumTiposEntrada()).allMatch(i -> entradasTipos.get(i) ==
+    	    	0) &&
+    	    	(IntStream.range(0,
+    	    	DatosFestival.getNumAreas()).allMatch(j -> entradasAreas.get(j) <=
+    	    	DatosFestival.getAforoMaximoArea(j)));
+//    	System.out.println(goli);
+    	return goli;
+    	}
 
 
 

@@ -55,7 +55,7 @@ public class DatosFestival {
     public static Boolean tests = false;
     private static List<Area> areas;
     private static List<TipoEntrada> tiposEntrada;
-    private static List<List<Integer>> sortedAreaIndicesPerType;
+    private static List<List<Integer>> tiposConAreasOrdenadas;
     
     public static void iniDatos(String fichero) {
         areas = List2.empty();
@@ -73,6 +73,32 @@ public class DatosFestival {
         
       
     }
+    
+    public static void ordenaDatos() {
+    	tiposConAreasOrdenadas = List2.empty();
+    	for (int i=0; i<tiposEntrada.size(); i++) {
+    	final int i_final = i;
+    	List<Integer> areasOrdenadas = IntStream.range(0,
+    	getNumAreas()).boxed()
+    	.sorted(Comparator.comparing(j ->
+    	getCosteAsignacion(i_final,j)))
+    	.toList();
+    	tiposConAreasOrdenadas.add(areasOrdenadas);
+    	}
+    	}
+    
+    public static Integer getI(Integer z) {
+    	return z/getNumAreas();
+    	}
+    	public static Integer getJPrima(Integer z) {
+    	return z%getNumAreas();
+    	}
+    
+    public static Integer getJ(Integer z) {
+    	ordenaDatos();
+    	int e = tiposConAreasOrdenadas.get(getI(z)).get(getJPrima(z));
+    	return e;
+    	}
     
     
     
@@ -112,6 +138,7 @@ public class DatosFestival {
 
     public static void main(String[] args) throws IOException {
         iniDatos("resources/ejercicio3/DatosEntrada1.txt");
-        System.out.println(getNumTiposEntrada());
+      
+        System.out.println(getJ(1));
     }
 }

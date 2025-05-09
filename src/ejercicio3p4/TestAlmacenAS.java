@@ -18,7 +18,7 @@ public class TestAlmacenAS {
 	public static EGraph<FestivalVertex, FestivalEdge> iniGraph() {
 		return EGraph.virtual(FestivalVertex.start())
 				.pathType(PathType.Sum)
-				.type(Type.Max)
+				.type(Type.Min)
 				.edgeWeight(FestivalEdge::weight)
 				.heuristic(FestivalHeuristic::heuristic)
 				.build();
@@ -30,7 +30,7 @@ public class TestAlmacenAS {
 	}
 
 	public static void main(String[] args) {
-		DatosFestival.iniDatos("resources/ejercicio3/DatosEntrada1.txt");
+		DatosFestival.iniDatos("resources/ejercicio3/DatosEntrada3.txt");
 		
 		var aEstrella= AStar.of(iniGraph());
 		print("estrella",aEstrella.search().get());

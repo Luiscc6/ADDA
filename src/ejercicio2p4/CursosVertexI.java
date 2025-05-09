@@ -103,10 +103,17 @@ public record CursosVertexI(Integer index, Integer prepres, Set<Integer> areascu
 		
 		
 		int aux =cursec.stream().mapToInt(i->DatosCursos.getDuracion(i)).sum();
+		System.out.println(aux);
 		int aux2 = cursec.stream().mapToInt(i->DatosCursos.getCoste(i)).sum();
-		if(((aux/cursec.size())>=20) & (aux2 <= prepres)) {
-			return areascubi.size() ==DatosCursos.getNumAreas();
+		System.out.println(aux2);
+		if(cursec.size() >0) {
+			if(((aux/cursec.size())<20) & (aux2 > prepres)) {
+				System.out.println("entro");
+				//return areascubi.size() ==DatosCursos.getNumAreas();
+				return false;
+			}
 		}
+		
 		
 		return true;
 	}

@@ -30,7 +30,7 @@ public class TestAlmacenAS {
 	}
 
 	public static void main(String[] args) {
-		DatosCursos.iniDatos("resources/ejercicio2/DatosEntrada3.txt");
+		DatosCursos.iniDatos("resources/ejercicio2/DatosEntrada1.txt");
 		
 		var aEstrella= AStar.of(iniGraph());
 		print("estrella",aEstrella.search().get());

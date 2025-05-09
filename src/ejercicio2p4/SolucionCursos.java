@@ -74,4 +74,9 @@ public class SolucionCursos {
     public Integer getCosteTotal() {
         return costeTotal;
     }
+
+	public static SolucionCursos of(List<Integer> acciones) {
+		
+		return new SolucionCursos(acciones);
+	}
 }

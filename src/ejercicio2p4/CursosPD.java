@@ -1,4 +1,4 @@
-package ejercicio1p4;
+package ejercicio2p4;
 
 import java.util.Comparator;
 import java.util.List;
@@ -8,7 +8,7 @@ import us.lsi.common.List2;
 import us.lsi.common.Map2;
 
 
-public class AlmacenPD {
+public class CursosPD {
 	
 	
 	public static record Spm(Integer a, Integer weight) implements Comparable<Spm> {
@@ -21,22 +21,25 @@ public class AlmacenPD {
 		}
 	}
 	
-	public static Map<AlmacenProblem, Spm> memory;
+	public static Map<CursosProblem, Spm> memory;
 	public static Integer mejorValor = Integer.MAX_VALUE; 
 
-	public static SolucionAlmacen search() {
+	public static SolucionCursos search() {
 		memory =  Map2.empty();
 		mejorValor = Integer.MAX_VALUE; // Estamos minimizando
 		
-		pdr_search(AlmacenProblem.initial(), 0, memory);
+		pdr_search(CursosProblem.initial(), 0, memory);
 		return getSolucion();
 	}
+	
+	
+	
 
-	private static Spm pdr_search(AlmacenProblem prob, Integer acumulado, Map<AlmacenProblem, Spm> memoria) {
-
+	private static Spm pdr_search(CursosProblem prob, Integer acumulado, Map<CursosProblem, Spm> memoria) {
+		
 		Spm res = null;
-		Boolean esTerminal = prob.index().equals(DatosAlmacenes.getNumProductos());
-		Boolean esSolucion = prob.index().equals(DatosAlmacenes.getNumProductos());
+		Boolean esTerminal = prob.goal();
+		Boolean esSolucion = prob.goalHasSolution();
 
 		if (memory.containsKey(prob)) {
 			res = memory.get(prob);
@@ -50,12 +53,11 @@ public class AlmacenPD {
 		} else {
 			List<Spm> soluciones = List2.empty();
 			for (Integer action : prob.actions()) {
-				System.out.println("soy action" + action);
 				Double cota = acotar(acumulado, prob, action);   		
 				if (cota > mejorValor) {
 					continue;
 				}
-				AlmacenProblem vecino = prob.neighbor(action);
+				CursosProblem vecino = prob.neighbor(action);
 				Spm s = pdr_search(vecino, acumulado + action, memory);
 				if (s != null) {
 					Spm amp = Spm.of(action, s.weight() + action);
@@ -71,21 +73,21 @@ public class AlmacenPD {
 		return res;
 	}
 
-	private static Double acotar(Integer acum, AlmacenProblem p, Integer a) {
+	private static Double acotar(Integer acum, CursosProblem p, Integer a) {
 		return acum + a + p.neighbor(a).heuristic();
 	}
 
-	public static SolucionAlmacen getSolucion() {
+	public static SolucionCursos getSolucion() {
 		List<Integer> acciones = List2.empty();
-		AlmacenProblem prob = AlmacenProblem.initial();
+		CursosProblem prob = CursosProblem.initial();
 		Spm spm = memory.get(prob);
 		while (spm != null && spm.a != null) {
-			AlmacenProblem old = prob;
+			CursosProblem old = prob;
 			acciones.add(spm.a);
 			prob = old.neighbor(spm.a);
 			spm = memory.get(prob);
 		}
-		return SolucionAlmacen.of(acciones);
+		return SolucionCursos.of(acciones);
 	}
 
 }
